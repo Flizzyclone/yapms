@@ -1,14 +1,17 @@
 import { ImportedSVGStore } from '$lib/stores/ImportedSVG';
 import { ImportModalStore } from '$lib/stores/Modals';
 import rewind from '@turf/rewind';
+import difference from '@turf/difference';
 import { geoMercator, geoPath } from 'd3';
 import * as shapefile from 'shapefile';
-import type { AllGeoJSON } from '@turf/helpers';
+import type { AllGeoJSON, MultiPolygon } from '@turf/helpers';
 import { get } from 'svelte/store';
 import { CandidatesStore, TossupCandidateStore } from '$lib/stores/Candidates';
 import { RegionsStore } from '$lib/stores/regions/Regions';
 import { saveAs } from 'file-saver';
 import DOMPurify from 'dompurify';
+import seaShapes from '$lib/assets/other/earth-seas.json';
+import lakeShapes from '$lib/assets/other/earth-lakes.json'
 
 //This config allows all attributes used by the app to pass through DOMPurify without change.
 //If you are adding an attribute imported maps might need, add it here.
@@ -67,6 +70,7 @@ async function importFromGeoJson(files: FileList): Promise<void> {
 }
 
 function geoJsonToSVG(districtShapes: GeoJSON.FeatureCollection) {
+	districtShapes = clipWater(districtShapes);
 	const width = 1000,
 		height = 1000;
 
@@ -127,6 +131,32 @@ function exportImportAsSVG(): void {
 			'YapmsMap.svg'
 		);
 	}
+}
+
+function clipWater(districtShapes: GeoJSON.FeatureCollection) {
+	districtShapes.features = districtShapes.features.map(
+		(feature: GeoJSON.Feature) =>
+			removeSeas(feature.geometry as MultiPolygon) as GeoJSON.Feature
+	);
+	districtShapes.features = districtShapes.features.map(
+		(feature: GeoJSON.Feature) => 
+			removeLakes(feature.geometry as MultiPolygon) as GeoJSON.Feature
+	);
+	return districtShapes
+}
+
+function removeSeas(geometry:MultiPolygon) {
+	for (const sea of seaShapes.features) {
+		geometry = difference(geometry, sea.geometry as MultiPolygon)
+	}
+	return geometry;
+}
+
+function removeLakes(geometry:MultiPolygon) {
+	for (const lake of lakeShapes.features) {
+		geometry = difference(geometry, lake.geometry as MultiPolygon)
+	}
+	return geometry;
 }
 
 export { importFromGeoJson, importFromShapefiles, newImportedMap, exportImportAsSVG };

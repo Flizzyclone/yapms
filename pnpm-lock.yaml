@@ -64,6 +64,7 @@ importers:
       '@fortawesome/free-solid-svg-icons': ^6.4.0
       '@sveltejs/adapter-node': ^1.2.4
       '@sveltejs/kit': ^1.20.4
+      '@turf/difference': ^6.5.0
       '@turf/helpers': ^6.5.0
       '@turf/rewind': ^6.5.0
       '@types/d3': ^7.4.0
@@ -106,6 +107,7 @@ importers:
       '@fortawesome/free-solid-svg-icons': 6.4.0
       '@sveltejs/adapter-node': 1.2.4_@sveltejs+kit@1.20.4
       '@sveltejs/kit': 1.20.4_svelte@3.59.1+vite@4.3.9
+      '@turf/difference': 6.5.0
       '@turf/helpers': 6.5.0
       '@turf/rewind': 6.5.0
       '@types/d3': 7.4.0
@@ -1123,6 +1125,14 @@ packages:
     resolution: {integrity: sha512-mzVtTFj/QycXOn6ig+annKrM6ZlimreKYz6f/GSERytOpgzodbQyOgkfwru100O1KQhhjSudKK4DsQ0oyi9cTw==}
     dependencies:
       '@turf/helpers': 6.5.0
+    dev: true
+
+  /@turf/difference/6.5.0:
+    resolution: {integrity: sha512-l8iR5uJqvI+5Fs6leNbhPY5t/a3vipUF/3AeVLpwPQcgmedNXyheYuy07PcMGH5Jdpi5gItOiTqwiU/bUH4b3A==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+      '@turf/invariant': 6.5.0
+      polygon-clipping: 0.15.3
     dev: true
 
   /@turf/helpers/6.5.0:
@@ -3608,6 +3618,12 @@ packages:
     resolution: {integrity: sha512-dGSwO2j3XqtFMANNNEVh/moRw0ItOraKC1p3J+I0y/tPEfgleCAUptMWhqHrFNS+jM5r21eSS1U48N9/OmHFzA==}
     dev: true
 
+  /polygon-clipping/0.15.3:
+    resolution: {integrity: sha512-ho0Xx5DLkgxRx/+n4O74XyJ67DcyN3Tu9bGYKsnTukGAW6ssnuak6Mwcyb1wHy9MZc9xsUWqIoiazkZB5weECg==}
+    dependencies:
+      splaytree: 3.1.2
+    dev: true
+
   /postcss-import/15.1.0_postcss@8.4.24:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
@@ -4018,6 +4034,10 @@ packages:
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
+    dev: true
+
+  /splaytree/3.1.2:
+    resolution: {integrity: sha512-4OM2BJgC5UzrhVnnJA4BkHKGtjXNzzUfpQjCO8I05xYPsfS/VuQDwjCGGMi8rYQilHEV4j8NBqTFbls/PZEE7A==}
     dev: true
 
   /sprintf-js/1.0.3:
