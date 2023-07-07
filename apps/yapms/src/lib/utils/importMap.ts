@@ -10,6 +10,7 @@ import { CandidatesStore, TossupCandidateStore } from '$lib/stores/Candidates';
 import { RegionsStore } from '$lib/stores/regions/Regions';
 import { saveAs } from 'file-saver';
 import DOMPurify from 'dompurify';
+import type { RegionCandidates } from '$lib/types/Region';
 import seaShapes from '$lib/assets/other/earth-seas.json';
 import lakeShapes from '$lib/assets/other/earth-lakes.json'
 
@@ -24,8 +25,6 @@ export const DOMPurifyConfig = {
 		'locked',
 		'permalocked',
 		'disabled',
-		'candidate-id',
-		'candidate-margin',
 		'for',
 		'candidates',
 		'tossup-candidate',
@@ -111,19 +110,20 @@ function exportImportAsSVG(): void {
 		svg.setAttribute('candidates', JSON.stringify(get(CandidatesStore)));
 		svg.setAttribute('tossup-candidate', JSON.stringify(get(TossupCandidateStore)));
 		for (const region of regions) {
-			if (region.candidates[0].candidate.id !== '') {
-				//If not Tossup
-				region.nodes.region.setAttribute('candidate-id', region.candidates[0].candidate.id);
-				if (region.candidates[0].margin !== undefined) {
-					region.nodes.region.setAttribute(
-						'candidate-margin',
-						region.candidates[0].margin.toString()
-					);
-				}
-			} else {
-				//Remove attributes if imported map had them
-				region.nodes.region.removeAttribute('candidate-id');
-				region.nodes.region.removeAttribute('candidate-margin');
+			const candidateAttr: RegionCandidates = [];
+			region.candidates.forEach((elem) => {
+				candidateAttr.push({
+					...elem,
+					candidate: elem.candidate.id
+				});
+			});
+			region.nodes.region.setAttribute('candidates', JSON.stringify(candidateAttr));
+			region.nodes.region.setAttribute('value', region.permaVal.toString());
+			if (region.disabled) {
+				region.nodes.region.setAttribute('disabled', region.disabled.toString());
+			}
+			if (region.locked) {
+				region.nodes.region.setAttribute('locked', region.locked.toString());
 			}
 		}
 		saveAs(
