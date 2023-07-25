@@ -30,7 +30,10 @@ export const DOMPurifyConfig = {
 		'tossup-candidate',
 		'default-mode',
 		'auto-border-stroke-width',
-		'auto-border-stroke-width-limit'
+		'auto-border-stroke-width-limit',
+		'regions',
+		'region-texts',
+		'value-text'
 	]
 };
 
@@ -92,7 +95,7 @@ function geoJsonToSVG(districtShapes: GeoJSON.FeatureCollection) {
 	);
 
 	const output = `<svg id="importedSVG" width="${width}" height="${height}" auto-border-stroke-width="1" auto-border-stroke-width-limit=".1">
-    <g class="regions">
+    <g regions>
     ${paths.join('\n')}
     </g>
     </svg>`;
