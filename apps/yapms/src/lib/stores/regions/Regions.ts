@@ -18,7 +18,7 @@ export const RegionsStore = writable<Region[]>([]);
 */
 RegionsStore.subscribe((regions) => {
 	if (browser) {
-		const patterns = document?.getElementById("map-div")?.querySelector('svg')?.querySelectorAll('pattern');
+		const patterns = document?.getElementById("map-div")?.querySelector('svg')?.querySelector(`[regions]`)?.querySelectorAll('pattern');
 		patterns?.forEach((pattern) => pattern.remove());
 	}
 	
@@ -92,8 +92,8 @@ RegionsStore.subscribe((regions) => {
 				name += `-${winner.candidate.id}`;
 			})
 			pattern.setAttribute('id',name);
-			const mapSVG = document?.getElementById("map-div")?.querySelector('svg');
-			mapSVG?.appendChild(pattern);
+			const regionsGroup = document?.getElementById("map-div")?.querySelector('svg')?.querySelector(`[regions]`);
+			regionsGroup?.appendChild(pattern);
 			fill = `url(#${name})`;
 			const colors = winners.map((winner) => winner.candidate.margins[0].color);
 			lumaColor = `#${blendHexes(colors)}`;
