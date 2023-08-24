@@ -39,8 +39,8 @@ const EditRegionModalStore = writable<{
 });
 
 const SplitRegionModalStore = writable<{
-	region: Region | null;
 	open: boolean;
+	region: Region | null;
 }>({
 	region: null,
 	open: false
@@ -50,15 +50,11 @@ const PresetColorsModalStore = writable({
 	open: false
 });
 
-const ChartOptionsModalStore = writable({
+const OptionsModalStore = writable({
 	open: false
 });
 
 const ModeModalStore = writable({
-	open: false
-});
-
-const StyleModalStore = writable({
 	open: false
 });
 
@@ -99,9 +95,8 @@ export {
 	SplitRegionModalStore,
 	AddCandidateModalStore,
 	PresetColorsModalStore,
-	ChartOptionsModalStore,
+	OptionsModalStore,
 	ModeModalStore,
-	StyleModalStore,
 	ShareModalStore,
 	LoginModalStore,
 	LoadingErrorModalStore,

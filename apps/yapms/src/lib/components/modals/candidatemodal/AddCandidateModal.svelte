@@ -24,22 +24,20 @@
 	}
 
 	function close() {
-		AddCandidateModalStore.set({
+		if ($PresetColorsModalStore.open === true) {
+			return;
+		}
+		$AddCandidateModalStore = {
 			open: false,
 			newColors: ['#000000']
-		});
+		};
 		$CandidateModalStore.open = true;
 		newName = '';
 	}
 
 	function selectPresetColor() {
-		AddCandidateModalStore.set({
-			...$AddCandidateModalStore,
-			open: false
-		});
-		PresetColorsModalStore.set({
-			open: true
-		});
+		$PresetColorsModalStore.open = true;
+		$AddCandidateModalStore.open = false;
 	}
 
 	function confirm() {
@@ -58,18 +56,13 @@
 	}
 </script>
 
-<ModalBase title="Add Candidate" open={$AddCandidateModalStore.open}>
+<ModalBase title="Add Candidate" store={AddCandidateModalStore} onClose={close}>
 	<div slot="content">
 		<div class="flex">
 			<div class="form-control w-full max-w-xs flex flex-col gap-3">
 				<h3 class="font-light text-lg">Name</h3>
 				<input type="text" class="input input-bordered w-full max-w-xs" bind:value={newName} />
-				<input
-					type="button"
-					class="btn btn-primary"
-					value="Preset Colors"
-					on:click={selectPresetColor}
-				/>
+				<button class="btn btn-primary" on:click={selectPresetColor}> preset colors </button>
 			</div>
 
 			<div class="divider divider-horizontal" />
@@ -107,6 +100,5 @@
 	</div>
 	<div slot="action">
 		<button class="btn btn-success" on:click={confirm}> Add </button>
-		<button class="btn btn-primary" on:click={close}> Close </button>
 	</div>
 </ModalBase>

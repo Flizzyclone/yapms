@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { CandidatesStore } from '$lib/stores/Candidates';
 	import { ChartTypeStore, ChartPositionStore } from '$lib/stores/Chart';
 	import { LogoStore } from '$lib/stores/Logo';
 	import ChartBar from '../chartbar/ChartBar.svelte';
@@ -31,7 +30,7 @@
 	class:w-96={$ChartPositionStore === 'left' && $ChartTypeStore !== 'battle'}
 	class:h-80={$ChartPositionStore === 'bottom' && $ChartTypeStore !== 'battle'}
 >
-	{#if $ChartTypeStore === 'battle' && $CandidatesStore.length <= 2}
+	{#if $ChartTypeStore === 'battle'}
 		<BattleChart />
 	{:else}
 		<ChartBar />

@@ -6,11 +6,11 @@
 		ClearMapModalStore,
 		CandidateModalStore,
 		ModeModalStore,
-		ChartOptionsModalStore,
-		StyleModalStore,
+		OptionsModalStore,
 		ShareModalStore,
 		LoginModalStore,
-		ShareDisabledModalStore
+		ShareDisabledModalStore,
+		ThemeModalStore
 	} from '$lib/stores/Modals';
 	import { ModeStore } from '$lib/stores/Mode';
 	import ChevronDoubleRight from '$lib/icons/ChevronDoubleRight.svelte';
@@ -28,9 +28,9 @@
 		$CandidateModalStore.open = true;
 	}
 
-	function openChartOptions() {
-		ChartOptionsModalStore.set({
-			...$ChartOptionsModalStore,
+	function openOptions() {
+		OptionsModalStore.set({
+			...$OptionsModalStore,
 			open: true
 		});
 	}
@@ -38,13 +38,6 @@
 	function openMode() {
 		ModeModalStore.set({
 			...$ModeModalStore,
-			open: true
-		});
-	}
-
-	function openStyle() {
-		StyleModalStore.set({
-			...$StyleModalStore,
 			open: true
 		});
 	}
@@ -59,6 +52,13 @@
 	function openShareDisabled() {
 		ShareDisabledModalStore.set({
 			...$ShareDisabledModalStore,
+			open: true
+		});
+	}
+
+	function openTheme() {
+		ThemeModalStore.set({
+			...$ThemeModalStore,
 			open: true
 		});
 	}
@@ -82,14 +82,14 @@
 	<button class="btn btn-sm btn-error" on:click={openClearMapModal}>clear</button>
 	<button class="btn btn-sm" on:click={openCandidateModal}>candidates</button>
 	<button class="btn btn-sm" on:click={newImportedMap}>import</button>
-	<button class="btn btn-sm" on:click={openStyle}>style</button>
-	<button class="btn btn-sm" on:click={openChartOptions}>chart options</button>
+	<button class="btn btn-sm" on:click={openOptions}>options</button>
 	<button class="btn btn-sm" on:click={openMode}>mode: {$ModeStore}</button>
 	{#if importPage}
 		<button class="btn btn-sm" on:click={openShareDisabled}>share</button>
 	{:else}
 		<button class="btn btn-sm" on:click={openShare}>share</button>
 	{/if}
+	<button class="btn btn-sm" on:click={openTheme}>theme</button>
 	<button class="btn btn-sm" on:click={openLogin}>login</button>
 	<div class="grow" />
 	<button class="btn btn-sm hidden md:flex" on:click={toggleSidebar}>
