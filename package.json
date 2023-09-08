@@ -1,5 +1,5 @@
 {
-	"packageManager": "pnpm@7.19.0",
+	"packageManager": "pnpm@7.33.6",
 	"engines": {
 		"node": "^18.0.0"
 	},
@@ -13,8 +13,8 @@
 		"format": "turbo run format"
 	},
 	"devDependencies": {
-		"dotenv-cli": "^7.2.1",
+		"dotenv-cli": "^7.3.0",
 		"dotenv-vault": "^1.25.0",
-		"turbo": "^1.10.11"
+		"turbo": "^1.10.13"
 	}
 }
