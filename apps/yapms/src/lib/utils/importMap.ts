@@ -10,7 +10,7 @@ import { CandidatesStore, TossupCandidateStore } from '$lib/stores/Candidates';
 import { RegionsStore } from '$lib/stores/regions/Regions';
 import { saveAs } from 'file-saver';
 import DOMPurify from 'dompurify';
-import type { RegionCandidates } from '$lib/types/Region';
+import type { SavedRegionCandidates } from '$lib/types/Region';
 import seaShapes from '$lib/assets/other/earth-seas.json';
 import lakeShapes from '$lib/assets/other/earth-lakes.json'
 
@@ -113,7 +113,7 @@ function exportImportAsSVG(): void {
 		svg.setAttribute('candidates', JSON.stringify(get(CandidatesStore)));
 		svg.setAttribute('tossup-candidate', JSON.stringify(get(TossupCandidateStore)));
 		for (const region of regions) {
-			const candidateAttr: RegionCandidates = [];
+			const candidateAttr: SavedRegionCandidates = [];
 			region.candidates.forEach((elem) => {
 				candidateAttr.push({
 					...elem,
