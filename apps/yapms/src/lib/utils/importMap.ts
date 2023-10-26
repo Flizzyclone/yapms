@@ -1,7 +1,7 @@
 import { ImportedSVGStore } from '$lib/stores/ImportedSVG';
 import { ImportModalStore } from '$lib/stores/Modals';
 import rewind from '@turf/rewind';
-import { geoMercator, geoPath } from 'd3';
+import { geoAlbersUsa, geoMercator, geoPath } from 'd3';
 import * as shapefile from 'shapefile';
 import type { AllGeoJSON } from '@turf/helpers';
 import { get } from 'svelte/store';
@@ -22,7 +22,7 @@ export const DOMPurifyConfig = {
 		'locked',
 		'permalocked',
 		'disabled',
-		'for',
+		'for-region',
 		'candidates',
 		'tossup-candidate',
 		'default-mode',
@@ -30,7 +30,11 @@ export const DOMPurifyConfig = {
 		'auto-border-stroke-width-limit',
 		'regions',
 		'region-texts',
-		'value-text'
+		'value-text',
+		'insets',
+		'inset-texts',
+		'inset-lines',
+		'inset-region'
 	]
 };
 
@@ -79,7 +83,12 @@ function geoJsonToSVG(districtShapes: GeoJSON.FeatureCollection) {
 			rewind(feature as AllGeoJSON, { reverse: true }) as GeoJSON.Feature
 	);
 
-	const projection = geoMercator().fitSize([width, height], districtShapes);
+	const importOptions = get(ImportedSVGStore).options;
+
+	let projection = geoMercator().fitSize([width, height], districtShapes);
+	if (importOptions.projection == 'Albers USA') {
+		projection = geoAlbersUsa().fitSize([width, height], districtShapes);
+	}
 
 	const render = geoPath().projection(projection);
 
@@ -107,7 +116,11 @@ function geoJsonToSVG(districtShapes: GeoJSON.FeatureCollection) {
 
 	svg.appendChild(regions);
 
-	ImportedSVGStore.set({ loaded: true, content: DOMPurify.sanitize(svg, DOMPurifyConfig) });
+	ImportedSVGStore.set({
+		...get(ImportedSVGStore),
+		loaded: true,
+		content: DOMPurify.sanitize(svg, DOMPurifyConfig)
+	});
 }
 
 function newImportedMap(): void {
@@ -144,4 +157,23 @@ function exportImportAsSVG(): void {
 	}
 }
 
-export { importFromGeoJson, importFromShapefiles, newImportedMap, exportImportAsSVG };
+//tool-specific
+async function importfromStatesFun(files: FileList): Promise<void> {
+	const districtShapes = JSON.parse(await files[0].text());
+	districtShapes.features = [];
+
+	for (const state of districtShapes.states) {
+		districtShapes.features.push(state.state_layer.feature);
+	}
+	districtShapes.type = 'FeatureCollection';
+
+	geoJsonToSVG(districtShapes);
+}
+
+export {
+	importFromGeoJson,
+	importFromShapefiles,
+	importfromStatesFun,
+	newImportedMap,
+	exportImportAsSVG
+};

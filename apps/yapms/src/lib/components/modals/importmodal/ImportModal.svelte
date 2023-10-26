@@ -10,6 +10,8 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import ExportSvgButton from './ExportSVGButton.svelte';
+	import ImportOptions from './ImportOptions.svelte';
+	import ToolSpecific from './ToolSpecific.svelte';
 
 	let geoJsonFiles: FileList;
 	let shapeFiles: FileList;
@@ -21,46 +23,15 @@
 	const multipleFilesTooltip =
 		'Select multiple files to upload and they will be automatically merged.';
 
-	async function loadGeoJson() {
+	async function load(importFunc: Function, files: FileList) {
 		loading = true;
 		try {
-			ImportedSVGStore.set({ loaded: false, content: '' });
-			await importFromGeoJson(geoJsonFiles);
-			close?.();
-			if ($page.url.pathname !== '/app/imported') {
-				await goto('/app/imported');
-			}
-		} catch (error) {
-			console.error(error);
-			loadError = true;
-		}
-		loading = false;
-	}
-
-	async function loadShapeFiles() {
-		loading = true;
-		try {
-			ImportedSVGStore.set({ loaded: false, content: '' });
-			await importFromShapefiles(shapeFiles);
-			close?.();
-			if ($page.url.pathname !== '/app/imported') {
-				await goto('/app/imported');
-			}
-		} catch (error) {
-			console.error(error);
-			loadError = true;
-		}
-		loading = false;
-	}
-
-	async function loadSVG() {
-		loading = true;
-		try {
-			ImportedSVGStore.set({ loaded: false, content: '' });
 			ImportedSVGStore.set({
-				loaded: true,
-				content: DOMPurify.sanitize(await svgFiles[0].text(), DOMPurifyConfig)
+				...$ImportedSVGStore,
+				loaded: false,
+				content: ''
 			});
+			await importFunc(files);
 			close?.();
 			if ($page.url.pathname !== '/app/imported') {
 				await goto('/app/imported');
@@ -70,6 +41,14 @@
 			loadError = true;
 		}
 		loading = false;
+	}
+
+	async function loadSVG(files: FileList) {
+		ImportedSVGStore.set({
+			...$ImportedSVGStore,
+			loaded: true,
+			content: DOMPurify.sanitize(await files[0].text(), DOMPurifyConfig)
+		});
 	}
 
 	function close() {
@@ -110,7 +89,9 @@
 						/>
 						<button
 							class="btn btn-secondary gap-1 flex-nowrap"
-							on:click={loadGeoJson}
+							on:click={() => {
+								load(importFromGeoJson, geoJsonFiles);
+							}}
 							disabled={!geoJsonFiles || geoJsonFiles.length < 1 || loading}
 						>
 							<ArrowUpTray class="w-5 h-5" />
@@ -138,7 +119,9 @@
 						/>
 						<button
 							class="btn btn-secondary gap-1 flex-nowrap"
-							on:click={loadShapeFiles}
+							on:click={() => {
+								load(importFromShapefiles, shapeFiles);
+							}}
 							disabled={!shapeFiles || shapeFiles.length < 1 || loading}
 						>
 							<ArrowUpTray class="w-5 h-5" />
@@ -167,7 +150,9 @@
 						/>
 						<button
 							class="btn btn-secondary gap-1 flex-nowrap"
-							on:click={loadSVG}
+							on:click={() => {
+								load(loadSVG, svgFiles);
+							}}
 							disabled={!svgFiles || svgFiles.length < 1 || loading}
 						>
 							<ArrowUpTray class="w-5 h-5" />
@@ -175,6 +160,12 @@
 						</button>
 					</div>
 				</div>
+
+				<div class="divider divider-vertical mt-1 -mb-1" />
+
+				<ToolSpecific {load} {loading} />
+
+				<ImportOptions />
 			</div>
 		</div>
 	</div>

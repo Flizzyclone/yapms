@@ -6,5 +6,8 @@ import type ImportedSVG from '$lib/types/ImportedSVG';
  */
 export const ImportedSVGStore = writable<ImportedSVG>({
 	loaded: false,
-	content: ''
+	content: '',
+	options: {
+		projection: 'Mercator'
+	}
 });
