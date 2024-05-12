@@ -26,6 +26,7 @@
 	import { browser } from '$app/environment';
 	import { SideBarStore } from '$lib/stores/SideBar';
 	import NavigateHomeModal from '$lib/components/modals/navigatehomemodal/NavigateHomeModal.svelte';
+	import ToolsModal from '$lib/components/modals/toolsmodal/ToolsModal.svelte';
 
 	function handleKeyDown(event: KeyboardEvent) {
 		$InteractionStore.set(event.code, true);
@@ -94,5 +95,7 @@
 <ShareModal />
 
 <ImportModal />
+
+<ToolsModal />
 
 <RegionTooltip />

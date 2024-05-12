@@ -8,7 +8,8 @@
 		ShareModalStore,
 		AuthModalStore,
 		ThemeModalStore,
-		NavigateHomeModalStore
+		NavigateHomeModalStore,
+		ToolsModalStore
 	} from '$lib/stores/Modals';
 	import { ModeStore } from '$lib/stores/Mode';
 	import ChevronDoubleRight from '$lib/icons/ChevronDoubleRight.svelte';
@@ -53,6 +54,10 @@
 		$AuthModalStore.open = true;
 	}
 
+	function openTools() {
+		$ToolsModalStore.open = true;
+	}
+
 	function toggleSidebar() {
 		$SideBarStore.open = !$SideBarStore.open;
 	}
@@ -78,6 +83,7 @@
 		<button class="btn btn-sm snap-end" on:click={openAuth}
 			>{$PocketBaseStore.authStore.isValid ? 'Account' : 'Login'}</button
 		>
+		<button class="btn btn-sm snap-start" on:click={openTools}>Tools</button>
 	</div>
 	<div class="divider divider-horizontal m-0 w-0" class:hidden={isOverflow === false} />
 	<button class="btn btn-sm btn-neutral mx-2" on:click={toggleSidebar}>
