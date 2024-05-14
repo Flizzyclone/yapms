@@ -19,13 +19,12 @@
 			return;
 		}
 		$RegionsStore.forEach((region) => {
-			console.log(region);
 			if (!region.disabled && !region.permaLocked) {
 				region.value = value;
 			}
 			region.permaVal = value;
-			$MassEditModalStore.open = false;
 		});
+		$MassEditModalStore.open = false;
 		$RegionsStore = $RegionsStore;
 	}
 </script>
