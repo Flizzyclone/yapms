@@ -6,7 +6,7 @@
 	$: value = 1;
 
 	function preventNonNumericalInput(e: KeyboardEvent) {
-		if (!e.key.match(/^[0-9]+$/)) e.preventDefault();
+		if (e.key !== "Enter" && !e.key.match(/^[0-9]+$/)) e.preventDefault();
 	}
 
 	function preventNonNumericalPaste(e: ClipboardEvent) {
