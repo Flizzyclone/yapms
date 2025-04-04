@@ -1,17 +1,27 @@
 <script lang="ts">
 	import MapCard from '../MapCard.svelte';
-	const links = [
+	const groups = [
 		{
-			label: 'Assembly 2024',
-			route: '/app/prt/assembly/2024070/blank'
+			label: '',
+			routes: [
+				{
+					label: 'Assembly 2024',
+					route: '/app/prt/assembly/2024070/blank'
+				},
+				{
+					label: 'Districts',
+					route: '/app/prt/districts/2021093/blank'
+				}
+			]
 		},
 		{
-			label: 'Districts',
-			route: '/app/prt/districts/2021093/blank'
-		},
-		{
-			label: 'Municipalities',
-			route: '/app/prt/municipalities/2018316/blank'
+			label: '',
+			routes: [
+				{
+					label: 'Municipalities',
+					route: '/app/prt/municipalities/2018316/blank'
+				}
+			]
 		}
 	];
 </script>
@@ -21,5 +31,5 @@
 	bg="prt"
 	attribution="Photo by Max Avans"
 	attributionLink="https://www.pexels.com/photo/white-concrete-building-under-blue-sky-5072289/"
-	{links}
+	{groups}
 />

@@ -1,33 +1,32 @@
 <script lang="ts">
 	import MapCard from '../MapCard.svelte';
-	const links = [
+	const groups = [
 		{
 			label: 'National Assembly',
-			route: '/app/zaf/assembly/2019128/blank'
+			routes: [
+				{
+					label: 'National Assembly 2019',
+					route: '/app/zaf/assembly/2019128/blank'
+				},
+				{
+					label: '2019 Results',
+					modalLabel: '2019 National Assembly Results',
+					route: '/app/zaf/assembly/2019128/results'
+				}
+			]
 		},
 		{
-			label: '2019 Results',
-			route: '/app/zaf/assembly/2019128/results'
-		},
-		{
-			label: 'Provinces',
-			route: '/app/zaf/provinces'
-		},
-		{
-			label: '2019 National Assembly',
-			route: '/app/zaf/assembly/2019128/blank'
-		},
-		{
-			label: '2019 National Assembly Results',
-			route: '/app/zaf/assembly/2019128/results'
-		},
-		{
-			label: 'Provinces',
-			route: '/app/zaf/provinces'
-		},
-		{
-			label: 'Municipalities',
-			route: '/app/zaf/municipalities/2019275/blank'
+			label: '',
+			routes: [
+				{
+					label: 'Provinces',
+					route: '/app/zaf/provinces'
+				},
+				{
+					label: 'Municipalities',
+					route: '/app/zaf/municipalities/2019275/blank'
+				}
+			]
 		}
 	];
 </script>
@@ -37,5 +36,5 @@
 	bg="zaf"
 	attribution="Photo by Clayton"
 	attributionLink="https://www.pexels.com/photo/the-statue-of-nelson-mandela-on-the-union-buildings-grounds-pretoria-gauteng-south-africa-10527763/"
-	{links}
+	{groups}
 />
