@@ -38,7 +38,7 @@
 					route: '/app/usa/house/2026/blank'
 				},
 				{
-					label: '[MAKE 2024 RESULT]',
+					label: '2024 Results',
 					modalLabel: '2024 House Results',
 					route: '/app/usa/house/2024310/results'
 				}
