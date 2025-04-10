@@ -13,8 +13,7 @@
 					label: '2022 Results',
 					modalLabel: '2022 House of Representatives Results',
 					route: '/app/aus/house/2022/results'
-				},
-				
+				}
 			]
 		},
 		{
@@ -44,7 +43,7 @@
 					route: '/app/aus/house/2022/blank'
 				}
 			]
-		},	
+		},
 		{
 			label: '',
 			routes: [
@@ -63,23 +62,19 @@
 		},
 		{
 			label: 'Sydney by Allyson Fernando',
-			route: 'https://www.pexels.com/photo/drone-shot-of-the-famous-sydney-opera-house-in-australia-7549817/'
+			route:
+				'https://www.pexels.com/photo/drone-shot-of-the-famous-sydney-opera-house-in-australia-7549817/'
 		},
 		{
 			label: 'Brisbane by Valeriia Miller',
-			route: 'https://www.pexels.com/photo/photo-of-bridge-and-buildings-during-golden-hour-2516657/'
+			route:
+				'https://www.pexels.com/photo/photo-of-bridge-and-buildings-during-golden-hour-2516657/'
 		},
 		{
 			label: 'Uluru by Jonas Schallenberg',
 			route: 'https://www.pexels.com/photo/uluru-rock-formation-in-central-australia-6610368/'
 		}
-	]
+	];
 </script>
 
-<MapCard
-	name="Australia"
-	bg="aus"
-	{imageLinks}
-	{groups}
-	full
-/>
+<MapCard name="Australia" bg="aus" {imageLinks} {groups} full />

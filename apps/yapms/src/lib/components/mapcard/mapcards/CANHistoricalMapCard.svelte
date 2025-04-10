@@ -11,7 +11,7 @@
 				{
 					label: 'House of Commons 2019',
 					route: '/app/can/commons/2019/results'
-				},
+				}
 			]
 		},
 		{
@@ -37,7 +37,12 @@
 				{
 					label: 'House of Commons 2006',
 					route: '/app/can/commons/2006023/results'
-				},
+				}
+			]
+		},
+		{
+			label: '',
+			routes: [
 				{
 					label: 'House of Commons 2004',
 					route: '/app/can/commons/2004179/results'
@@ -45,7 +50,12 @@
 				{
 					label: 'House of Commons 2000',
 					route: '/app/can/commons/2000331/results'
-				},
+				}
+			]
+		},
+		{
+			label: '',
+			routes: [
 				{
 					label: 'House of Commons 1997',
 					route: '/app/can/commons/1997153/results'
@@ -93,4 +103,5 @@
 	attribution="Photo by Tetyana Kovyrina"
 	attributionLink="https://www.pexels.com/photo/parliament-hill-in-ottawa-canada-15715832/"
 	{groups}
+	full
 />

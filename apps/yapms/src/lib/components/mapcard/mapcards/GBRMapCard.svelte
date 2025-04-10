@@ -52,19 +52,14 @@
 		},
 		{
 			label: 'Stonehenge by Bernd Feurich',
-			route: 'https://www.pexels.com/photo/photo-of-the-stonehenge-historical-landmark-in-england-2497520/'
+			route:
+				'https://www.pexels.com/photo/photo-of-the-stonehenge-historical-landmark-in-england-2497520/'
 		},
 		{
 			label: 'Edinburgh Castle by Frederick Adegoke Snr.',
 			route: 'https://www.pexels.com/photo/edinburgh-castle-on-the-mountain-14643999/'
 		}
-	]
+	];
 </script>
 
-<MapCard
-	name="United Kingdom"
-	bg="gbr"
-	{imageLinks}
-	{groups}
-	square
-/>
+<MapCard name="United Kingdom" bg="gbr" {imageLinks} {groups} square />

@@ -32,7 +32,6 @@
 		{
 			label: '',
 			routes: [
-				
 				{
 					label: 'Regional Councils',
 					route: '/app/nzl/regions/2023/blank'

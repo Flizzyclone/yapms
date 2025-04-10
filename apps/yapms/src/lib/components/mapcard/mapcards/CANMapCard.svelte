@@ -45,14 +45,10 @@
 		},
 		{
 			label: 'Vancouver by Adi K',
-			route: 'https://www.pexels.com/photo/bird-s-eye-view-photography-of-high-rise-buildings-2382868/'
+			route:
+				'https://www.pexels.com/photo/bird-s-eye-view-photography-of-high-rise-buildings-2382868/'
 		}
-	]
+	];
 </script>
 
-<MapCard
-	name="Canada"
-	bg="can"
-	{imageLinks}
-	{groups}
-/>
+<MapCard name="Canada" bg="can" {imageLinks} {groups} />

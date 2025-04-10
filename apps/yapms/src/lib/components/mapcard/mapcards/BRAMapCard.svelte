@@ -38,12 +38,7 @@
 			label: 'Christ the Redeemer by Joao Ricardo Januzzi',
 			route: 'https://www.pexels.com/photo/statue-of-jesus-with-the-moon-in-the-background-9229056/'
 		}
-	]
+	];
 </script>
 
-<MapCard
-	name="Brazil"
-	bg="bra"
-	{imageLinks}
-	{groups}
-/>
+<MapCard name="Brazil" bg="bra" {imageLinks} {groups} />
