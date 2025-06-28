@@ -15,6 +15,7 @@
 		setLoadedMapFromJson,
 		gotoLoadedMap
 	} from '$lib/stores/LoadedMap';
+	import Leaflet from '$lib/components/leaflet/Leaflet.svelte';
 
 	let requestedMap = $derived(page.url.pathname.replace('/app/', '').replaceAll('/', '-'));
 	let country = $derived(requestedMap.split('-').at(0));
@@ -59,9 +60,15 @@
 	</div>
 {:then map}
 	<div
+		id="leaflet-div"
+		class="w-full h-full relative z-10"
+	>
+		<Leaflet/>
+	</div>
+	<div
 		use:setupMap
 		id="map-div"
-		class="overflow-hidden h-full outline-none"
+		class="overflow-hidden h-full outline-none relative -translate-y-full z-20"
 		class:insets-hidden={$MapInsetsStore.hidden}
 		class:texts-hidden={$RegionTextsStore.hidden}
 	>
